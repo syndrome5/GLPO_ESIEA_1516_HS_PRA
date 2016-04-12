@@ -220,6 +220,21 @@ public class Player
 		else return false;
 	}
 	
+	public int getSizeDeck()
+	{
+		return this.deck.size();
+	}
+	
+	public int getSizeHand()
+	{
+		return this.inHand.size();
+	}
+	
+	public int getSizeBoard()
+	{
+		return this.inBoard.size();
+	}
+	
 	public void mixDeck()
 	{
 		Collections.shuffle(deck);

@@ -1,10 +1,14 @@
 package com.tard.hom;
 
+import java.io.IOException;
+
 public class Launcher 
 {
-	public static void main(String[] args) 
+	private static Game game;
+	
+	public static void main(String[] args) throws IOException
 	{
-		Game game = new Game("J1","J2",1,true,2,false);
+		game = new Game("J1","J2",1,true,2,false);
 		game.start();
 	}
 }
