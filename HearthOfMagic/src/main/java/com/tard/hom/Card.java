@@ -9,16 +9,18 @@ public class Card
 	private int cost;
 	private boolean provocation;
 	private Element element;
+	private int id;
 
-	public Card(String name, Rare rare, int life, int attack, int cost, boolean provocation, Element element) 
+	public Card(String name, Rare rare, boolean provocation, Element element, int id) 
 	{
 		this.name = name;
 		this.rare = rare;
-		this.life = life;
-		this.attack = attack;
-		this.cost = cost;
+		this.life = 0;
+		this.attack = 0;
+		this.cost = 0;
 		this.provocation = provocation;
 		this.element = element;
+		this.id = id;
 	}
 
 	public String getName() 
@@ -44,6 +46,21 @@ public class Card
 	public int getCost()
 	{
 		return cost;
+	}
+	
+	public void setLife(int life)
+	{
+		this.life = life;
+	}
+	
+	public void setAttack(int attack)
+	{
+		this.attack = attack;
+	}
+	
+	public void setCost(int cost)
+	{
+		this.cost = cost;
 	}
 	
 	public boolean getProvocation()

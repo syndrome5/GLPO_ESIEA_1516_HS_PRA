@@ -42,6 +42,7 @@ public class Player
 	private List<Card> inHand;
 	private List<Card> inBoard;
 	private Mana mana;
+	private int pLife;
 	
 	public Player(String name)
 	{
@@ -50,6 +51,7 @@ public class Player
 		this.inHand = new ArrayList<Card>();
 		this.inBoard = new ArrayList<Card>();
 		this.mana = new Mana();
+		this.pLife = 30;
 	}
 	
 	public void afficherDeck()
@@ -139,12 +141,12 @@ public class Player
 		return card;
 	}
 	
-	public Card pickCardFromTopDeck()
+	public Card pickCardFromDeck(int id)
 	{
 		if (this.deck != null)
 		{
-			Card c = this.deck.get(0);
-			this.deck.remove(0);
+			Card c = this.deck.get(id);
+			this.deck.remove(id);
 			return c;
 		}
 		return null;
@@ -182,36 +184,90 @@ public class Player
 		return null;
 	}
 	
-	public void addRandomInDeck(List<Card> allCards, int nb, Boolean autoriserEnDouble)
+	public Card getCardFromHandById(int id, Boolean take)
 	{
-		Random randomGenerator = new Random();
-		Integer index, secure;
-		index = randomGenerator.nextInt(allCards.size());
-		for(int i=0;i<nb;i++)
+		if (this.inHand != null)
 		{
-			secure = 0;
-			do 
-			{
-				secure++;
-				if (secure==50) break;
-			} while (addCardInDeck(allCards.get(index),autoriserEnDouble)==null);
+			Card c = this.inHand.get(id);
+			if (take == true) this.inHand.remove(id);
+			return c;
+		}
+		return null;
+	}
+	
+	public Card getCardFromDeckById(int id, Boolean take)
+	{
+		if (this.deck != null)
+		{
+			Card c = this.deck.get(id);
+			if (take == true) this.deck.remove(id);
+			return c;
+		}
+		return null;
+	}
+	
+	public void addRandomInDeck(int nbCartes, List<Integer> boules, List<Card> allCards)
+	{
+		int id;
+		Card c,c2;
+		for (int i=0;i<nbCartes;i++)
+		{
+			do {
+				id = getRandomIdDeck(boules,allCards);
+				c = allCards.get(id);
+				switch (c.getRare())
+				{
+					case NORMAL:
+						c.setCost(getOneBoule(boules)%4 +1); // 1 2 3 4
+						c.setAttack(getOneBoule(boules)%4); // 0 < attack < 3
+						c.setLife(getOneBoule(boules)%5 +1); // 1 < life < 4
+					break;
+					case GOOD:
+						c.setCost(getOneBoule(boules)%4 +3); // 3 4 5 6
+						c.setAttack(getOneBoule(boules)%4 +2); // 2 < attack < 5
+						c.setLife(getOneBoule(boules)%5 +2); // 2 < life < 6
+					break;
+					case RARE:
+						c.setCost(getOneBoule(boules)%4 +6); // 6 7 8 9
+						c.setAttack(getOneBoule(boules)%6 +4); // 4 < attack < 7
+						c.setLife(getOneBoule(boules)%6 +4); // 4 < life < 7
+					break;
+					case INSANE:
+						c.setCost(getOneBoule(boules)%2 +9); // 9 10
+						c.setAttack(getOneBoule(boules)%11 +8); // 8 < attack < 10
+						c.setLife(getOneBoule(boules)%12 +8); // 8 < life < 12
+					break;
+				}
+				c2 = addCardInDeck(c, false);
+			} while (c2 == null);
 		}
 	}
 	
-	public void addRandomInHand(int nb, Boolean autoriserEnDouble)
+	public void addRandomInHand(int nbCartes, List<Integer> boules)
+	{
+		for (int i=0;i<nbCartes;i++)
+		{
+			if (this.isDeckEmpty()==false) do {} while (addCardInHand(getCardFromDeckById(getRandomIdDeck(boules,deck), true), false) == null);
+		}
+	}
+	
+	private int getOneBoule(List<Integer> boules)
 	{
 		Random randomGenerator = new Random();
-		Integer index, secure;
-		index = randomGenerator.nextInt(this.deck.size());
-		for(int i=0;i<nb;i++)
+		return randomGenerator.nextInt(boules.size());
+	}
+	
+	private int getRandomIdDeck(List<Integer> boules, List<Card> deck)
+	{
+		int tD = deck.size()/50;
+		int rD = deck.size()%50;
+		int id = 0;
+		for (int i=0;i<tD;i++)
 		{
-			secure = 0;
-			do 
-			{
-				secure++;
-				if (secure==50) break;
-			} while (addCardInHand(this.deck.get(index),autoriserEnDouble)==null);
+			id+=getOneBoule(boules);
 		}
+		if (rD != 0) id+=getOneBoule(boules)%rD;
+		return id;
 	}
 	
 	public Boolean isDeckEmpty()
@@ -253,6 +309,11 @@ public class Player
 	public void clearBoard()
 	{
 		this.inBoard.clear();
+	}
+	
+	public void resetLife()
+	{
+		this.pLife = 30;
 	}
 	
 	public String getName()

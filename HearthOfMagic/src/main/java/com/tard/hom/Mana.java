@@ -7,8 +7,8 @@ public class Mana
 	
 	public Mana()
 	{
-		this.mana = 1;
-		this.manaMax = 1;
+		this.mana = 0;
+		this.manaMax = 0;
 	}
 	
 	public int getMana()
@@ -23,8 +23,18 @@ public class Mana
 	
 	public void reset()
 	{
-		this.mana = 1;
-		this.manaMax = 1;
+		this.mana = 0;
+		this.manaMax = 0;
+	}
+	
+	public void addMana()
+	{
+		if (this.manaMax != this.mana) this.mana++;
+	}
+	
+	public void resetAddTourMax()
+	{
+		this.mana = this.manaMax;
 	}
 	
 	public void resetAddTour()
