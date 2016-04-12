@@ -22,6 +22,7 @@ public class CsvDeck implements Deck
 	{
 		final List<Card> cards = new ArrayList<Card>();
 		Rare rare = null;
+		Element ele = null;
 		Boolean provoc = false;
 		
 		for (String[] oneData : data) 
@@ -35,7 +36,11 @@ public class CsvDeck implements Deck
 				else if (oneData[1].equals("insane")) rare = Rare.INSANE;
 				if (oneData[5].equals("oui")) provoc = true;
 				else if (oneData[5].equals("non")) provoc = false;
-				cards.add(new Card(oneData[0], rare, Integer.parseInt(oneData[2]), Integer.parseInt(oneData[3]), Integer.parseInt(oneData[4]), provoc));
+				if (oneData[6].equals("feu")) ele = Element.FIRE;
+				else if (oneData[6].equals("eau")) ele = Element.WATER;
+				else if (oneData[6].equals("terre")) ele = Element.EARTH;
+				else if (oneData[6].equals("air")) ele = Element.AIR;
+				cards.add(new Card(oneData[0], rare, Integer.parseInt(oneData[2]), Integer.parseInt(oneData[3]), Integer.parseInt(oneData[4]), provoc,ele));
 			}
 		}
 

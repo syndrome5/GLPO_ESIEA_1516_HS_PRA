@@ -1,5 +1,5 @@
-nom;type;life;attack;cost;provoc
-Gobelin;normal;1;1;1;non
-Titan;insane;8;9;8;oui
-Troll;rare;6;2;4;oui
-Archer;good;2;5;4;non
+nom;type;life;attack;cost;provoc;element
+Gobelin;normal;1;1;1;non;terre
+Titan;insane;8;9;8;oui;eau
+Troll;rare;6;2;4;oui;feu
+Archer;good;2;5;4;non;air

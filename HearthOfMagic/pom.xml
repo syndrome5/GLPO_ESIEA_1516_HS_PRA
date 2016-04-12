@@ -11,19 +11,19 @@
 
 	<licenses>
 		<license>
-			<name>Copyright ©1995-2011 thierryler.com et Copyright ©2011 Developpez.com</name>
-			<comments>Les sources présentés sur cette page sont libres de droits, et vous pouvez les utiliser à votre convenance. Par contre cette page de présentation de ces sources constitue une oeuvre intellectuelle protégée par les droits d'auteurs. Copyright ©2011 Thierry Leriche-Dessirier. Aucune reproduction, même partielle, ne peut être faite de ce site et de l'ensemble de son contenu : textes, documents, images, etc sans l'autorisation expresse de l'auteur. Sinon vous encourez selon la loi jusqu'à 3 ans de prison et jusqu'à 300 000 E de dommages et intérêts. Cette page est déposée à la SACD.</comments>
+			<name>Copyright © Tard 2016</name>
+			<comments>Les sources présentés sur cette page sont libres de droits, et vous pouvez les utiliser à votre convenance. Par contre cette page de présentation de ces sources constitue une oeuvre intellectuelle protégée par les droits d'auteurs.</comments>
 		</license>
 	</licenses>
 
 	<developers>
-		<!-- Thierry -->
+		<!--Tard-->
 		<developer>
-			<name>Thierry Leriche-Dessirier</name>
+			<name>Tard</name>
 			<roles>
 				<role>Developper</role>
 			</roles>
-			<organization>ICAUDA</organization>
+			<organization>ESIEA</organization>
 		</developer>
 
 	</developers>
