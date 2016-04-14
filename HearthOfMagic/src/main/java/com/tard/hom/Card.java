@@ -1,5 +1,13 @@
 package com.tard.hom;
 
+import java.awt.Color;
+import java.awt.Graphics;
+import java.io.File;
+import java.io.IOException;
+
+import javax.imageio.ImageIO;
+import javax.swing.ImageIcon;
+
 public class Card
 {
 	private String name;
@@ -7,11 +15,12 @@ public class Card
 	private int life;
 	private int attack;
 	private int cost;
-	private boolean provocation;
-	private Element element;
 	private int id;
+	private boolean provocation;
+	private boolean canAttack;
+	private Element element;
 
-	public Card(String name, Rare rare, boolean provocation, Element element, int id) 
+	public Card(String name, Rare rare, boolean provocation, Element element, int id) throws IOException 
 	{
 		this.name = name;
 		this.rare = rare;
@@ -21,11 +30,17 @@ public class Card
 		this.provocation = provocation;
 		this.element = element;
 		this.id = id;
+		this.canAttack = false;
 	}
-
-	public String getName() 
+	
+	String getName() 
 	{
 		return name;
+	}
+	
+	String getRealName() 
+	{
+		return name.replace("*", " ");
 	}
 
 	public Rare getRare() 
@@ -46,6 +61,11 @@ public class Card
 	public int getCost()
 	{
 		return cost;
+	}
+	
+	public int getId()
+	{
+		return id;
 	}
 	
 	public void setLife(int life)
@@ -71,5 +91,15 @@ public class Card
 	public Element getElement()
 	{
 		return element;
+	}
+	
+	public void setCanAttack(boolean b)
+	{
+		this.canAttack = b;
+	}
+	
+	public boolean getCanAttack()
+	{
+		return canAttack;
 	}
 }

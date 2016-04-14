@@ -93,7 +93,7 @@ public class Player
 		System.out.println("Fin Board Joueur "+name);
 	}
 	
-	public Card addCardInHand(Card card, Boolean autoriserEnDouble)
+	public Card addCardInHand(Card card, Boolean autoriserEnDouble, Rare rare)
 	{
 		if (this.inHand != null && autoriserEnDouble == false)
 		{
@@ -104,6 +104,10 @@ public class Player
 					return null;
 				}
 			}
+		}
+		if (rare != null)
+		{
+			if (rare != card.getRare()) return null;
 		}
 		this.inHand.add(card);
 		return card;
@@ -152,20 +156,9 @@ public class Player
 		return null;
 	}
 	
-	public Card addCardInBoard(Card card, Boolean autoriserEnDouble)
+	public void addCardInBoard(Card card)
 	{
-		if (this.inBoard != null && autoriserEnDouble == true)
-		{
-			for (Card c:this.inBoard)
-			{
-				if (c.getName().equals(card.getName()))
-				{
-					return null;
-				}
-			}
-		}
 		this.inBoard.add(card);
-		return card;
 	}
 	
 	public Card getCardFromBoardByName(String name, Boolean take)
@@ -190,6 +183,17 @@ public class Player
 		{
 			Card c = this.inHand.get(id);
 			if (take == true) this.inHand.remove(id);
+			return c;
+		}
+		return null;
+	}
+	
+	public Card getCardFromBoardById(int id, Boolean take)
+	{
+		if (this.inBoard != null)
+		{
+			Card c = this.inBoard.get(id);
+			if (take == true) this.inBoard.remove(id);
 			return c;
 		}
 		return null;
@@ -220,7 +224,7 @@ public class Player
 					case NORMAL:
 						c.setCost(getOneBoule(boules)%4 +1); // 1 2 3 4
 						c.setAttack(getOneBoule(boules)%4); // 0 < attack < 3
-						c.setLife(getOneBoule(boules)%5 +1); // 1 < life < 4
+						c.setLife(getOneBoule(boules)%4 +1); // 1 < life < 4
 					break;
 					case GOOD:
 						c.setCost(getOneBoule(boules)%4 +3); // 3 4 5 6
@@ -229,13 +233,13 @@ public class Player
 					break;
 					case RARE:
 						c.setCost(getOneBoule(boules)%4 +6); // 6 7 8 9
-						c.setAttack(getOneBoule(boules)%6 +4); // 4 < attack < 7
-						c.setLife(getOneBoule(boules)%6 +4); // 4 < life < 7
+						c.setAttack(getOneBoule(boules)%4 +4); // 4 < attack < 7
+						c.setLife(getOneBoule(boules)%4 +4); // 4 < life < 7
 					break;
 					case INSANE:
 						c.setCost(getOneBoule(boules)%2 +9); // 9 10
-						c.setAttack(getOneBoule(boules)%11 +8); // 8 < attack < 10
-						c.setLife(getOneBoule(boules)%12 +8); // 8 < life < 12
+						c.setAttack(getOneBoule(boules)%3 +8); // 8 < attack < 10
+						c.setLife(getOneBoule(boules)%5 +8); // 8 < life < 12
 					break;
 				}
 				c2 = addCardInDeck(c, false);
@@ -243,18 +247,18 @@ public class Player
 		}
 	}
 	
-	public void addRandomInHand(int nbCartes, List<Integer> boules)
+	public void addRandomInHand(int nbCartes, List<Integer> boules, Rare rare)
 	{
 		for (int i=0;i<nbCartes;i++)
 		{
-			if (this.isDeckEmpty()==false) do {} while (addCardInHand(getCardFromDeckById(getRandomIdDeck(boules,deck), true), false) == null);
+			if (this.isDeckEmpty()==false) do {} while (addCardInHand(getCardFromDeckById(getRandomIdDeck(boules,deck), true), false, rare) == null);
 		}
 	}
 	
 	private int getOneBoule(List<Integer> boules)
 	{
 		Random randomGenerator = new Random();
-		return randomGenerator.nextInt(boules.size());
+		return boules.get(randomGenerator.nextInt(boules.size()));
 	}
 	
 	private int getRandomIdDeck(List<Integer> boules, List<Card> deck)
@@ -264,10 +268,22 @@ public class Player
 		int id = 0;
 		for (int i=0;i<tD;i++)
 		{
-			id+=getOneBoule(boules);
+			id += getOneBoule(boules);
 		}
 		if (rD != 0) id+=getOneBoule(boules)%rD;
 		return id;
+	}
+	
+	public boolean gotProvocationInBoard(Card attacked)
+	{
+		for (Card c:this.inBoard)
+		{
+			if (c.getProvocation() == true && attacked != c)
+			{
+				return true;
+			}
+		}
+		return false;
 	}
 	
 	public Boolean isDeckEmpty()
@@ -316,6 +332,16 @@ public class Player
 		this.pLife = 30;
 	}
 	
+	public int getLife()
+	{
+		return pLife;
+	}
+	
+	public void setLife(int life)
+	{
+		this.pLife = life;
+	}
+	
 	public String getName()
 	{
 		return name;
@@ -324,6 +350,14 @@ public class Player
 	public Mana getMana()
 	{
 		return mana;
+	}
+	
+	public void resetCanAttack()
+	{
+		for (Card c:this.inBoard)
+		{
+			c.setCanAttack(true);
+		}
 	}
 }
 

@@ -8,7 +8,7 @@ public class Launcher
 	
 	public static void main(String[] args) throws IOException
 	{
-		game = new Game("J1","J2",1,6,false);
+		game = new Game("J1","J2",1,20); // On commence par joueur 1, 40 cartes/personne
 		game.start();
 	}
 }

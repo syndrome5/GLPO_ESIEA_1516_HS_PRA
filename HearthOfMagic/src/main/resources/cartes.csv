@@ -1,10 +1,30 @@
 nom;type;provoc;element;id
-Gobelin;normal;non;terre;0
-Titan;insane;oui;eau;1
-Troll;rare;oui;feu;2
-Archer;good;non;air;3
-df;normal;non;feu;4
-é;normal;non;feu;5
-rgre;normal;non;feu;6
-ethr;normal;non;feu;7
-rg;normal;non;feu;8
+Huitre des profondeurs;normal;non;eau;1
+Gardes royaux;normal;non;terre;2
+Aquachanteur;good;non;eau;3
+Train de metal;good;oui;terre;4
+Hyenne mutante;insane;non;terre;5
+Le maitre des clefs;normal;non;terre;6
+La mage celeste;rare;non;air;7
+Gargouille malefique;normal;non;feu;8
+Le mangeur d'ame;rare;non;feu;9
+Les sirenes aqueuses;good;non;eau;10
+Le gardien des flammes;normal;oui;feu;11
+Les trolls du desert;good;non;terre;12
+Ombre de givre;rare;non;eau;13
+Squelettes serviles;insane;non;feu;14
+Mur d'air;good;non;air;15
+Reine sorciere;rare;non;terre;16
+Poltergeist xenique;normal;non;eau;17
+Rongeurs malades;normal;non;feu;18
+Sorcier sybarite;normal;non;terre;19
+Oiseau mecanique;good;non;air;20
+Sage soldevi;normal;non;eau;21
+Porteur de bouclier;normal;non;terre;22
+Insectes maritime;normal;non;eau;23
+Milice du Kjeldor;good;non;terre;24
+Ombre glaciale;rare;non;eau;25
+Shamane des embruns;good;non;eau;26
+Sphere phantasmatique;insane;non;air;27
+Vautour d'Osai;normal;non;air;28
+Vers fouisseurs;good;non;terre;29

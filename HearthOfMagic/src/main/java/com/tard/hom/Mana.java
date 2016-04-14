@@ -21,6 +21,11 @@ public class Mana
 		return manaMax;
 	}
 	
+	public void takeMana(int mana)
+	{
+		this.mana-=mana;
+	}
+	
 	public void reset()
 	{
 		this.mana = 0;

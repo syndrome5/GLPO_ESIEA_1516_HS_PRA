@@ -5,7 +5,7 @@ public enum Rare
 	NORMAL("Normal", "Carte basique"),
 	GOOD("Good", "Carte avantageuse"),
 	RARE("Rare", "Carte rare"),
-	INSANE("Insane", "La meilleure de sa catégorie");
+	INSANE("Insane", "Carte OP");
 	
 	private final String label;
 	private final String description;
